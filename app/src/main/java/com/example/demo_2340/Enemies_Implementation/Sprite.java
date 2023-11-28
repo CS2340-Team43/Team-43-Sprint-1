@@ -12,14 +12,15 @@ import com.example.demo_2340.CollisionObserver.CollisionObserver;
 //import com.example.demo_2340.R;
 //
 //import java.util.Random;
-
+//sprite file
 public class Sprite implements Enemies, CollisionObserver {
+    //relevant variables
     private String type;
     private double initialXPosition;
     private double initialYPosition;
     private double xPosition;
     private double yPosition;
-
+    //sprite constructor
     public Sprite() {
         type = "Sprite";
         this.initialXPosition = 0;
@@ -27,7 +28,7 @@ public class Sprite implements Enemies, CollisionObserver {
         this.xPosition = initialXPosition;
         this.yPosition = initialYPosition;
     }
-
+    //overriden methods
     @Override
     public String getType() {
         return type;
