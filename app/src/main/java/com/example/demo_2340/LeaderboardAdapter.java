@@ -8,14 +8,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+/**
+ * LeaderboardAdapter class
+ * Contains all methods to hold and enable
+ * the display of leaderboard in the game
+ */
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
     private static LeaderboardAdapter instance;
     private List<LeaderboardItem> leaderboardData;
-
-
-
-
     private LeaderboardAdapter(List<LeaderboardItem> leaderboardData) {
         this.leaderboardData = leaderboardData;
         this.leaderboardData.add(new LeaderboardItem("Grant", 400));
@@ -23,6 +24,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         this.leaderboardData.add(new LeaderboardItem("Bodan", 250));
         this.leaderboardData.add(new LeaderboardItem("Ary", 150));
     }
+
 
     public static LeaderboardAdapter getInstance(List<LeaderboardItem> leaderboardData) {
         if (instance == null) {

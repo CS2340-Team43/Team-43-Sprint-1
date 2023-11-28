@@ -1,5 +1,10 @@
 package com.example.demo_2340;
 
+/**
+ * LeaderboardItem class
+ * Contains the attributes of leaderboard entries
+ * and has methods to track the score of player
+ */
 public class LeaderboardItem {
     private String playerName;
     private int score;

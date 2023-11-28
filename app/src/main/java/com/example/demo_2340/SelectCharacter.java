@@ -9,8 +9,18 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+/**
+ * SelectCharacter class to enable
+ * players to choose a character
+ */
 public class SelectCharacter extends AppCompatActivity {
 
+    /**
+     * onCreate Method to handle
+     * the frontend of android studio
+     * and enable character selection
+     * @param savedInstanceState the current save of the game
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

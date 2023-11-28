@@ -1,22 +1,27 @@
 package com.example.demo_2340.Enemies_Implementation;
 
-import com.example.demo_2340.CollisionObserver.CollisionObserver;
+import android.content.res.Resources;
 
+import com.example.demo_2340.CollisionObserver.CollisionObserver;
+//heavy2 file
 public class Heavy2 implements Enemies, CollisionObserver {
+    //relevant variables to the class
     private String type;
     private double initialXPosition;
     private double initialYPosition;
     private double xPosition;
     private double yPosition;
-
+    private double initialxcord = 0;
+    private double initialycord = 0;
+    //constructor to set the relavent variables
     public Heavy2() {
         type = "Heavy";
-        this.initialXPosition = 0;
-        this.initialYPosition = 0;
+        this.initialXPosition = initialxcord;
+        this.initialYPosition = initialycord;
         this.xPosition = initialXPosition;
         this.yPosition = initialYPosition;
     }
-
+    //getters and setters for the variabels, opverriding the interface
     @Override
     public String getType() {
         return type;
@@ -67,5 +72,13 @@ public class Heavy2 implements Enemies, CollisionObserver {
         this.initialYPosition = initialY;
         this.xPosition = initialX;
         this.yPosition = initialY;
+    }
+    @Override
+    public void attack() {
+        int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        // Set the position to the bottom left of the screen
+        this.xPosition = 0;
+        this.yPosition = screenHeight;
     }
 }
