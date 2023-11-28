@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * LaunchScreen class which activates the initial scene
+ * Contains an onCreate method which activates the ga
+ */
 public class LaunchScreen extends AppCompatActivity {
 
     @Override
