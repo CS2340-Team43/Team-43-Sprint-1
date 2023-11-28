@@ -48,7 +48,8 @@ public class GameScreen3 extends AppCompatActivity {
 
     private boolean isAttackOnCooldown = false; // Flag to check if the attack is on cooldown
     private boolean isAttackActive = false; // Flag to check if the attack is currently active
-    private final Handler attackCooldownHandler = new Handler(Looper.myLooper());//Activity Loop for screen
+    //Activity Loop for screen
+    private final Handler attackCooldownHandler = new Handler(Looper.myLooper());
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -117,7 +118,7 @@ public class GameScreen3 extends AppCompatActivity {
         // Update the score TextView
         TextView livescoreTextView = findViewById(R.id.livescoreTextView);
         // if heavy or sprite attack game score is affected accordingly
-        if(heavyHit) {
+        if (heavyHit) {
             double s = ScoreTimer.getInterval() - 10;
             livescoreTextView.setText("Score: " + s);
         }
@@ -255,7 +256,8 @@ public class GameScreen3 extends AppCompatActivity {
         new Handler().postDelayed(() -> {
             playerImageView.setScaleX(1.0f);
             playerImageView.setScaleY(1.0f);
-            isAttackActive = false; // Reset the flag to indicate that the attack is no longer active
+            // Reset the flag to indicate that the attack is no longer active
+            isAttackActive = false;
         }, 10000);
 
         // Start a cooldown timer for 30 seconds
@@ -267,7 +269,8 @@ public class GameScreen3 extends AppCompatActivity {
 
         // Start a timer to reset the attack cooldown after 30 seconds
         attackCooldownHandler.postDelayed(() -> {
-            isAttackOnCooldown = false; // Reset the flag to indicate that the attack is no longer on cooldown
+            // Reset the flag to indicate that the attack is no longer on cooldown
+            isAttackOnCooldown = false;
         }, 30000);
     }
 
@@ -350,7 +353,8 @@ public class GameScreen3 extends AppCompatActivity {
             applyPowerUp(new HealthPowerUp());
         } else if (CollisionManager.isViewOverlapping(playerImageView, speedPowerUpImageView)) {
             applyPowerUp(new SpeedPowerUp());
-        } else if (CollisionManager.isViewOverlapping(playerImageView, attackCooldownPowerUpImageView)) {
+        } else if (CollisionManager.isViewOverlapping(playerImageView,
+                attackCooldownPowerUpImageView)) {
             applyPowerUp(new SlowPowerUp());
         }
     }
