@@ -8,6 +8,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
+/**
+ * LeaderboardAdapter class
+ * Contains all methods to hold and enable
+ * the display of leaderboard in the game
+ */
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.ViewHolder> {
 
     private static LeaderboardAdapter instance;
