@@ -9,9 +9,17 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * selectDifficuty class to enable
+ * players to select difficulty
+ */
 public class SelectDifficulty extends AppCompatActivity {
 
     @Override
+    /**
+     * onCreate method to handle the frontend of difficulty
+     * selection
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_difficulty);
