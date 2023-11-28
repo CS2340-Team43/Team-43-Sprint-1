@@ -16,6 +16,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.demo_2340.CollisionObserver.CollisionManager;
+import com.example.demo_2340.DecoratorPowerUp.HealthPowerUp;
+import com.example.demo_2340.DecoratorPowerUp.PowerUp;
+import com.example.demo_2340.DecoratorPowerUp.SlowPowerUp;
+import com.example.demo_2340.DecoratorPowerUp.SpeedPowerUp;
 import com.example.demo_2340.Enemies_Implementation.Enemies;
 import com.example.demo_2340.Enemies_Implementation.EnemiesFactory;
 import com.example.demo_2340.Player_Movement.MoveDown;
@@ -31,12 +35,20 @@ public class GameScreen3 extends AppCompatActivity {
     private ImageView playerImageView;
     private ImageView enemyImageView1;
     private ImageView enemyImageView2;
+
+    private ImageView healthPowerUpImageView;
+    private ImageView speedPowerUpImageView;
+    private ImageView attackCooldownPowerUpImageView;
     private boolean gameOverFlag = false; // Add this flag
     private boolean moveButtonPressed = false;
     // flags to check if heavy enemy or sprite
     private boolean heavyHit = false;
     private boolean spriteHit = false;
     private final Handler clockHandler = new Handler(Looper.myLooper()); //Activity Loop for screen
+
+    private boolean isAttackOnCooldown = false; // Flag to check if the attack is on cooldown
+    private boolean isAttackActive = false; // Flag to check if the attack is currently active
+    private final Handler attackCooldownHandler = new Handler(Looper.myLooper());//Activity Loop for screen
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -55,6 +67,10 @@ public class GameScreen3 extends AppCompatActivity {
         playerImageView = findViewById(R.id.playerImageView);
         enemyImageView1 = findViewById(R.id.enemyImageView1);
         enemyImageView2 = findViewById(R.id.enemyImageView2);
+
+        healthPowerUpImageView = findViewById(R.id.healthPowerUpImageView);
+        speedPowerUpImageView = findViewById(R.id.speedPowerUpImageView);
+        attackCooldownPowerUpImageView = findViewById(R.id.attackCooldownPowerUpImageView);
 
         // Create Enemies
         spriteEnemy = EnemiesFactory.buildEnemies("Sprite");
@@ -100,8 +116,7 @@ public class GameScreen3 extends AppCompatActivity {
     private void updateScore() {
         // Update the score TextView
         TextView livescoreTextView = findViewById(R.id.livescoreTextView);
-        // Test double s = ScoreTimer.getInterval() - heavyEnemy.getDamage();
-        // score affected depending on if there was a heavy attack or a sprite attack
+        // if heavy or sprite attack game score is affected accordingly
         if(heavyHit) {
             double s = ScoreTimer.getInterval() - 10;
             livescoreTextView.setText("Score: " + s);
@@ -117,7 +132,7 @@ public class GameScreen3 extends AppCompatActivity {
         playerHealthProgressBar.setProgress(player.getHealth());
     }
 
-    private boolean handleTouch(MotionEvent event, int deltaX, int deltaY) {
+    private boolean handleTouch(MotionEvent event, double deltaX, double deltaY) {
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             moveButtonPressed = true;
@@ -150,7 +165,6 @@ public class GameScreen3 extends AppCompatActivity {
         rootView.invalidate();
     }
     private void moveEnemySprite(double deltaX, double deltaY) {
-
         FrameLayout fr = findViewById(R.id.playerInfoView);
 
         double newX = spriteEnemy.getxPosition();
@@ -165,7 +179,7 @@ public class GameScreen3 extends AppCompatActivity {
             deltaY *= -1; // Reverse the y-axis movement direction
         }
 
-        newX = spriteEnemy.getxPosition() + deltaX;
+        newX = spriteEnemy.getxPosition() - deltaX;
         newY = spriteEnemy.getyPosition() + deltaY;
 
         // Update the sprite's position
@@ -177,6 +191,17 @@ public class GameScreen3 extends AppCompatActivity {
         enemyImageView1.setY((float) newY);
 
         checkCollisions();
+        /**
+         if (newX >= 0 && newX <= rootView.getWidth() - enemyImageView1.getWidth()) {
+         enemyImageView1.setX((float) newX);
+         spriteEnemy.setxPosition(newX);
+         }
+
+         if (newY > fr.getHeight() && newY <= rootView.getHeight() - enemyImageView1.getHeight()) {
+         enemyImageView1.setY((float) newY);
+         spriteEnemy.setyPosition(newY);
+         }
+         **/
     }
 
 
@@ -211,6 +236,39 @@ public class GameScreen3 extends AppCompatActivity {
         buttonLeft.setOnTouchListener((v, event) -> handleTouch(event, left.move(amount), 0));
         MovementStrategyPattern right = new MoveRight();
         buttonRight.setOnTouchListener((v, event) -> handleTouch(event, right.move(amount), 0));
+        Button attackButton = findViewById(R.id.buttonAttack);
+        attackButton.setOnClickListener(v -> {
+            if (!isAttackOnCooldown && !isAttackActive) {
+                startAttack();
+            }
+        });
+    }
+
+    private void startAttack() {
+        isAttackActive = true; // Set the flag to indicate that the attack is active
+
+        // Increase player image size for 10 seconds
+        playerImageView.setScaleX(3f);
+        playerImageView.setScaleY(3f);
+
+        // Start a timer to revert the player image size after 10 seconds
+        new Handler().postDelayed(() -> {
+            playerImageView.setScaleX(1.0f);
+            playerImageView.setScaleY(1.0f);
+            isAttackActive = false; // Reset the flag to indicate that the attack is no longer active
+        }, 10000);
+
+        // Start a cooldown timer for 30 seconds
+        startAttackCooldown();
+    }
+
+    private void startAttackCooldown() {
+        isAttackOnCooldown = true; // Set the flag to indicate that the attack is on cooldown
+
+        // Start a timer to reset the attack cooldown after 30 seconds
+        attackCooldownHandler.postDelayed(() -> {
+            isAttackOnCooldown = false; // Reset the flag to indicate that the attack is no longer on cooldown
+        }, 30000);
     }
 
     private void createPlayer() {
@@ -226,14 +284,14 @@ public class GameScreen3 extends AppCompatActivity {
 
     private void createEnemies() {
         //Sprite
-        spriteEnemy.setInitialPosition(enemyImageView1.getX(),
+        spriteEnemy.setInitialPosition(900,
                 (getResources().getDisplayMetrics().heightPixels
-                        - playerImageView.getHeight()) / 5);
+                        - playerImageView.getHeight()) / 3);
 
         //Heavy1
         heavyEnemy.setInitialPosition(enemyImageView2.getX(),
                 (getResources().getDisplayMetrics().heightPixels
-                        - playerImageView.getHeight()) / 2);
+                        - playerImageView.getHeight()) / 4);
     }
 
     private void moveToNextScreen() {
@@ -272,8 +330,33 @@ public class GameScreen3 extends AppCompatActivity {
     }
 
     private void checkCollisions() {
-        CollisionManager.checkCollisions(player, spriteEnemy, heavyEnemy,
-                playerImageView, enemyImageView1, enemyImageView2);
+        // Check collisions and delete enemies if the attack is active
+        if (isAttackActive) {
+            // Check and handle collisions for attacking enemies
+            CollisionManager.checkAttackingCollisions(player, spriteEnemy, heavyEnemy,
+                    playerImageView, enemyImageView1, enemyImageView2);
+            checkPowerUpCollisions();
+        } else {
+            // Check collisions as usual
+            CollisionManager.checkCollisions(player, spriteEnemy, heavyEnemy,
+                    playerImageView, enemyImageView1, enemyImageView2);
+            checkPowerUpCollisions();
+        }
+    }
+
+    private void checkPowerUpCollisions() {
+        // Check if player collides with power-ups and apply their effects
+        if (CollisionManager.isViewOverlapping(playerImageView, healthPowerUpImageView)) {
+            applyPowerUp(new HealthPowerUp());
+        } else if (CollisionManager.isViewOverlapping(playerImageView, speedPowerUpImageView)) {
+            applyPowerUp(new SpeedPowerUp());
+        } else if (CollisionManager.isViewOverlapping(playerImageView, attackCooldownPowerUpImageView)) {
+            applyPowerUp(new SlowPowerUp());
+        }
+    }
+
+    private void applyPowerUp(PowerUp powerUp) {
+        powerUp.powerUpHero(player);
     }
 
     private void checkGameOver() {

@@ -166,7 +166,7 @@ public class GameScreen2 extends AppCompatActivity {
 
         rootView.invalidate();
     }
-    private void moveEnemySprite(int deltaX, int deltaY) {
+    private void moveEnemySprite(double deltaX, double deltaY) {
         FrameLayout fr = findViewById(R.id.playerInfoView);
 
         double newX = spriteEnemy.getxPosition();
