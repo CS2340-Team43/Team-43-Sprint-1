@@ -45,4 +45,14 @@
         android:layout_marginStart="50dp"
         android:layout_above="@id/buttonLeft" />
 
+    <Button
+        android:id="@+id/buttonAttack"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:text="Atk"
+        android:textSize="20sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="50dp"
+        android:layout_above="@id/buttonRight" />
+
 </RelativeLayout>

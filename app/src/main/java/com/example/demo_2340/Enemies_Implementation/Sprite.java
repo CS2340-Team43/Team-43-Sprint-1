@@ -3,6 +3,8 @@ package com.example.demo_2340.Enemies_Implementation;
 //import android.widget.FrameLayout;
 //
 //import com.example.demo_2340.CollisionObserver.CollisionManager;
+import android.content.res.Resources;
+
 import com.example.demo_2340.CollisionObserver.CollisionObserver;
 //import com.example.demo_2340.Player_Movement.MoveDown;
 //import com.example.demo_2340.Player_Movement.MoveLeft;
@@ -114,5 +116,14 @@ public class Sprite implements Enemies, CollisionObserver {
     @Override
     public void onCollisionDetected(int damage) {
 
+    }
+
+    @Override
+    public void attack() {
+        int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        // Set the position to the bottom left of the screen
+        this.xPosition = 0;
+        this.yPosition = 500f;
     }
 }

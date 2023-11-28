@@ -26,7 +26,28 @@ public class CollisionManager {
         }
     }
 
+    public static void checkAttackingCollisions(Player player, Enemies enemy1,
+                                                Enemies enemy2, ImageView playerImageView,
+                                                ImageView enemyImageView1, ImageView enemyImageView2) {
+
+        // Check collisions during player's attack
+        if (isViewOverlapping(playerImageView, enemyImageView1)) {
+
+            enemy1.attack();
+        }
+
+        if (isViewOverlapping(playerImageView, enemyImageView2)) {
+
+            enemy2.attack();
+        }
+    }
+
     public static boolean isViewOverlapping(View firstView, View secondView) {
+        if (firstView == null || secondView == null) {
+
+            return false;
+        }
+
         int[] firstPosition = new int[2];
         int[] secondPosition = new int[2];
 
