@@ -1,5 +1,7 @@
 package com.example.demo_2340.Enemies_Implementation;
 
+import android.content.res.Resources;
+
 import com.example.demo_2340.CollisionObserver.CollisionObserver;
 
 public class Heavy1 implements Enemies, CollisionObserver {
@@ -74,7 +76,7 @@ public class Heavy1 implements Enemies, CollisionObserver {
 
     @Override
     public double getDamage() {
-        return 10;
+        return 5;
     }
 
     public void setInitialPosition(double initialX, double initialY) {
@@ -87,5 +89,13 @@ public class Heavy1 implements Enemies, CollisionObserver {
     @Override
     public void onCollisionDetected(int damage) {
 
+    }
+    @Override
+    public void attack() {
+        int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        // Set the position to the bottom left of the screen
+        this.xPosition = 0;
+        this.yPosition = 500f;
     }
 }

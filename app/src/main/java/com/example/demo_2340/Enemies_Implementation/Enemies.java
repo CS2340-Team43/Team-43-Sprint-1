@@ -21,4 +21,6 @@ public interface Enemies {
     void setInitialPosition(double x, double y);
 
     void onCollisionDetected(int i);
+
+    void attack();
 }

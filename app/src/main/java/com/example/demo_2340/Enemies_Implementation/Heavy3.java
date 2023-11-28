@@ -1,5 +1,7 @@
 package com.example.demo_2340.Enemies_Implementation;
 
+import android.content.res.Resources;
+
 import com.example.demo_2340.CollisionObserver.CollisionObserver;
 //heavy3 file
 public class Heavy3 implements Enemies, CollisionObserver {
@@ -70,5 +72,13 @@ public class Heavy3 implements Enemies, CollisionObserver {
     @Override
     public void onCollisionDetected(int i) {
 
+    }
+    @Override
+    public void attack() {
+        int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+
+        // Set the position to the bottom left of the screen
+        this.xPosition = 0;
+        this.yPosition = screenHeight;
     }
 }
