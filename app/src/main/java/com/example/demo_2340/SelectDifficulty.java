@@ -7,13 +7,19 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+/**
+ * selectDifficuty class to enable
+ * players to select difficulty
+ */
 public class SelectDifficulty extends AppCompatActivity {
 
     @Override
+    /**
+     * onCreate method to handle the frontend of difficulty
+     * selection
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_difficulty);
@@ -43,7 +49,8 @@ public class SelectDifficulty extends AppCompatActivity {
                     // Start the target activity
                     startActivity(intent);
                 } else {
-                    Toast.makeText(SelectDifficulty.this, "Please Select a Difficulty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SelectDifficulty.this,
+                            "Please Select a Difficulty", Toast.LENGTH_SHORT).show();
                 }
             }
         });

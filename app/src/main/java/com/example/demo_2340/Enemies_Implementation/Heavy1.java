@@ -8,7 +8,7 @@ public class Heavy1 implements Enemies, CollisionObserver {
     private double initialYPosition;
     private double xPosition;
     private double yPosition;
-
+    //Initialize heavy1 and add relavent variables
     public Heavy1() {
         type = "Heavy";
         this.initialXPosition = 0;
@@ -16,18 +16,37 @@ public class Heavy1 implements Enemies, CollisionObserver {
         this.xPosition = initialXPosition;
         this.yPosition = initialYPosition;
     }
-
-    @Override
+    //random and movement variables
+    private int movementMultiplier = 4;
+    private double randomMultiplier = 10.0 * movementMultiplier;
+    private int rightBound = 7 * movementMultiplier;
+    private int leftBound = 5 * movementMultiplier;
+    private int downBound = 3 * movementMultiplier;
+  
     public String getType() {
         return type;
     }
-
-    @Override
+    //implementing the interface methods
     public double move() {
-        // Always move to the right by a fixed amount
-        double rightwardMovement = 10.0;
+        double randMovementAmount = Math.random() * randomMultiplier;
+        String direc = "";
+        if (randMovementAmount <= randomMultiplier && randMovementAmount > rightBound) {
+            direc = "Right";
+        } else if (randMovementAmount <= rightBound && randMovementAmount > leftBound) {
+            direc = "Left";
+        } else if (randMovementAmount <= leftBound && randMovementAmount > downBound) {
+            direc = "Down";
+        }
 
-        xPosition += rightwardMovement;
+        // seperate actual movement from logic to aid with modificaitons
+        int movement = (int) randMovementAmount;
+        if (direc.equals("Right")) {
+            xPosition += movement;
+        } else if (direc.equals("Left")) {
+            xPosition -= movement;
+        } else if (direc.equals("Down")) {
+            yPosition += movement;
+        }
 
         return xPosition;
     }

@@ -8,6 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * LaunchScreen class which activates the initial scene
+ * Contains an onCreate method which activates the ga
+ */
 public class LaunchScreen extends AppCompatActivity {
 
     @Override
@@ -37,7 +41,8 @@ public class LaunchScreen extends AppCompatActivity {
                     startActivity(intent);
                 } else {
                     // Display an error message if the player's name is empty
-                    Toast.makeText(LaunchScreen.this, "Please enter your name", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LaunchScreen.this, "Please enter your name",
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
