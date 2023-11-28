@@ -1,8 +1,9 @@
 package com.example.demo_2340.Enemies_Implementation;
 
 import com.example.demo_2340.CollisionObserver.CollisionObserver;
-
+//heavy3 file
 public class Heavy3 implements Enemies, CollisionObserver {
+    //relevant variables
     private String type;
     private double initialXPosition;
     private double initialYPosition;
@@ -10,7 +11,7 @@ public class Heavy3 implements Enemies, CollisionObserver {
     private double yPosition;
     private double initialxcord = 0;
     private double initialycord = 0;
-
+    //heavy3 constructor
     public Heavy3() {
         type = "Heavy";
         this.initialXPosition = initialxcord;
@@ -18,7 +19,7 @@ public class Heavy3 implements Enemies, CollisionObserver {
         this.xPosition = initialXPosition;
         this.yPosition = initialYPosition;
     }
-
+    //overriden interface methods
     @Override
     public String getType() {
         return type;
