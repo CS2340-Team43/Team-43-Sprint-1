@@ -14,12 +14,20 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import org.junit.Rule;
 import org.junit.Test;
 
+/**
+ * Score Test class
+ * Goes over tests for the score
+ */
 public class ScoreTest {
 
     @Rule
     public ActivityScenarioRule<GameScreen1> activityScenarioRule =
             new ActivityScenarioRule<>(GameScreen1.class);
 
+    /**
+     * Tests if the score function works properly
+     * Hard codes the intents and values to properly test
+     */
     @Test
     public void testScore1() {
         // Check if the score function works properly
