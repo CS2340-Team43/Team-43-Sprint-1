@@ -33,6 +33,7 @@ public class GameScreen1 extends AppCompatActivity {
     private ImageView enemyImageView2;
     private boolean gameOverFlag = false; // Add this flag
     private boolean moveButtonPressed = false;
+    // flags to check which enemy attacked
     private boolean heavyHit = false;
     private boolean spriteHit = false;
     private final Handler clockHandler = new Handler(Looper.myLooper()); //Activity Loop for screen
@@ -103,6 +104,7 @@ public class GameScreen1 extends AppCompatActivity {
     private void updateScore() {
         // Update the score TextView
         TextView livescoreTextView = findViewById(R.id.livescoreTextView);
+        // if heavy or sprite attack game score is affected accordingly
         if(heavyHit) {
             double s = ScoreTimer.getInterval() - 10;
             livescoreTextView.setText("Score: " + s);
