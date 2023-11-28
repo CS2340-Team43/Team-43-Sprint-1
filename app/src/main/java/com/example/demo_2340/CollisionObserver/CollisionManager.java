@@ -43,6 +43,11 @@ public class CollisionManager {
     }
 
     public static boolean isViewOverlapping(View firstView, View secondView) {
+        if (firstView == null || secondView == null) {
+
+            return false;
+        }
+
         int[] firstPosition = new int[2];
         int[] secondPosition = new int[2];
 
