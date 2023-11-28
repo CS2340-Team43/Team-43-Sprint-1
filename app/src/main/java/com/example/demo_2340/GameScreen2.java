@@ -33,6 +33,9 @@ public class GameScreen2 extends AppCompatActivity {
     private ImageView enemyImageView2;
     private boolean gameOverFlag = false; // Add this flag
     private boolean moveButtonPressed = false;
+    // flags to check which enemy attacked
+    private boolean heavyHit = false;
+    private boolean spriteHit = false;
     private final Handler clockHandler = new Handler(Looper.myLooper()); //Activity Loop for screen
 
     @Override
@@ -100,6 +103,15 @@ public class GameScreen2 extends AppCompatActivity {
     private void updateScore() {
         // Update the score TextView
         TextView livescoreTextView = findViewById(R.id.livescoreTextView);
+        //implementing enemy flags to change score depending on which enemy
+        if(heavyHit) {
+            double s = ScoreTimer.getInterval() - 10;
+            livescoreTextView.setText("Score: " + s);
+        }
+        if (spriteHit) {
+            double s = ScoreTimer.getInterval() - 5;
+            livescoreTextView.setText("Score: " + s);
+        }
         livescoreTextView.setText("Score: " + ScoreTimer.getInterval());
 
         // Update the health TextView
