@@ -127,9 +127,9 @@ public class GameScreen3 extends AppCompatActivity {
         }
         return true;
     }
-    private void movePlayer(int deltaX, int deltaY) {
-        int newX = player.getxPosition() + deltaX;
-        int newY = player.getyPosition() + deltaY;
+    private void movePlayer(double deltaX, double deltaY) {
+        double newX = player.getxPosition() + deltaX;
+        double newY = player.getyPosition() + deltaY;
 
         View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
         if (newX >= 0 && newX <= rootView.getWidth() - playerImageView.getWidth()) {

@@ -9,11 +9,11 @@ import com.example.demo_2340.Player_Movement.MovementStrategyPattern;
 public class Player implements CollisionObserver {
     private static Player instance = null;
     private MovementStrategyPattern movementStrategy;
-    private int xPosition;
-    private int yPosition;
+    private double xPosition;
+    private double yPosition;
     private int health;  // Added health variable
 
-    private int speed;
+    private double speed;
 
     private boolean isAttackOnCooldown = false;
 
@@ -43,7 +43,7 @@ public class Player implements CollisionObserver {
      * positionGetter
      * @return int position
      */
-    public int getxPosition() {
+    public double getxPosition() {
         return xPosition;
     }
 
@@ -51,7 +51,7 @@ public class Player implements CollisionObserver {
      * positionSetter for X
      * @param xPosition int for movement
      */
-    public void setxPosition(int xPosition) {
+    public void setxPosition(double xPosition) {
         this.xPosition = xPosition;
     }
 
@@ -59,7 +59,7 @@ public class Player implements CollisionObserver {
      * Getter for y Position
      * @return int representing y position
      */
-    public int getyPosition() {
+    public double getyPosition() {
         return yPosition;
     }
 
@@ -67,7 +67,7 @@ public class Player implements CollisionObserver {
      * setter for y position
      * @param yPosition int
      */
-    public void setyPosition(int yPosition) {
+    public void setyPosition(double yPosition) {
         this.yPosition = yPosition;
     }
 
@@ -118,7 +118,7 @@ public class Player implements CollisionObserver {
      * getter for Speed
      * @return int speed
      */
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
@@ -126,7 +126,7 @@ public class Player implements CollisionObserver {
      * setter for speed
      * @param speed int for speed
      */
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 
@@ -135,17 +135,6 @@ public class Player implements CollisionObserver {
      */
     private void endGame() {
 
-    }
-
-    public void takeDamage(int damage) {
-        // Deduct health
-        health -= damage;
-
-        // Check if player has run out of health
-        if (health <= 0) {
-            // Perform actions when the player is out of health (e.g., end the game)
-            endGame();
-        }
     }
 
     public boolean isAttackOnCooldown() {

@@ -16,10 +16,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.demo_2340.CollisionObserver.CollisionManager;
-import com.example.demo_2340.DecoratorPowerUp.AttackCooldownResetPowerUp;
+import com.example.demo_2340.DecoratorPowerUp.SlowPowerUp;
 import com.example.demo_2340.DecoratorPowerUp.HealthPowerUp;
 import com.example.demo_2340.DecoratorPowerUp.PowerUp;
-import com.example.demo_2340.DecoratorPowerUp.PowerUpBase;
 import com.example.demo_2340.DecoratorPowerUp.SpeedPowerUp;
 import com.example.demo_2340.Enemies_Implementation.Enemies;
 import com.example.demo_2340.Enemies_Implementation.EnemiesFactory;
@@ -137,7 +136,7 @@ public class GameScreen1 extends AppCompatActivity {
         playerHealthProgressBar.setProgress(player.getHealth());
     }
 
-    private boolean handleTouch(MotionEvent event, int deltaX, int deltaY) {
+    private boolean handleTouch(MotionEvent event, double deltaX, double deltaY) {
         int action = event.getAction();
         if (action == MotionEvent.ACTION_DOWN) {
             moveButtonPressed = true;
@@ -147,9 +146,9 @@ public class GameScreen1 extends AppCompatActivity {
         }
         return true;
     }
-    private void movePlayer(int deltaX, int deltaY) {
-        int newX = player.getxPosition() + deltaX;
-        int newY = player.getyPosition() + deltaY;
+    private void movePlayer(double deltaX, double deltaY) {
+        double newX = player.getxPosition() + deltaX;
+        double newY = player.getyPosition() + deltaY;
 
         View rootView = getWindow().getDecorView().findViewById(android.R.id.content);
         if (newX >= 0 && newX <= rootView.getWidth() - playerImageView.getWidth()) {
@@ -356,7 +355,7 @@ public class GameScreen1 extends AppCompatActivity {
         } else if (CollisionManager.isViewOverlapping(playerImageView, speedPowerUpImageView)) {
             applyPowerUp(new SpeedPowerUp());
         } else if (CollisionManager.isViewOverlapping(playerImageView, attackCooldownPowerUpImageView)) {
-            applyPowerUp(new AttackCooldownResetPowerUp(new PowerUpBase()));
+            applyPowerUp(new SlowPowerUp());
         }
     }
 
