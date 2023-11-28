@@ -15,6 +15,8 @@ public class Player implements CollisionObserver {
 
     private int speed;
 
+    private boolean isAttackOnCooldown = false;
+
     /**
      * Base Constructor for singleton player
      */
@@ -133,5 +135,24 @@ public class Player implements CollisionObserver {
      */
     private void endGame() {
 
+    }
+
+    public void takeDamage(int damage) {
+        // Deduct health
+        health -= damage;
+
+        // Check if player has run out of health
+        if (health <= 0) {
+            // Perform actions when the player is out of health (e.g., end the game)
+            endGame();
+        }
+    }
+
+    public boolean isAttackOnCooldown() {
+        return isAttackOnCooldown;
+    }
+
+    public void setAttackCooldown(boolean cooldown) {
+        isAttackOnCooldown = cooldown;
     }
 }

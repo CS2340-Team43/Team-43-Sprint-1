@@ -78,5 +78,41 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.25" />
 
+    <ImageView
+        android:id="@+id/healthPowerUpImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/health_power_up_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.397" />
+
+    <ImageView
+        android:id="@+id/speedPowerUpImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/speed_power_up_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.873" />
+
+    <ImageView
+        android:id="@+id/attackCooldownPowerUpImageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/attack_cooldown_power_up_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.538" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

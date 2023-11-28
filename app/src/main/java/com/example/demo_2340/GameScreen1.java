@@ -16,6 +16,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.demo_2340.CollisionObserver.CollisionManager;
+import com.example.demo_2340.DecoratorPowerUp.AttackCooldownResetPowerUp;
+import com.example.demo_2340.DecoratorPowerUp.HealthPowerUp;
+import com.example.demo_2340.DecoratorPowerUp.PowerUp;
+import com.example.demo_2340.DecoratorPowerUp.PowerUpBase;
+import com.example.demo_2340.DecoratorPowerUp.SpeedPowerUp;
 import com.example.demo_2340.Enemies_Implementation.Enemies;
 import com.example.demo_2340.Enemies_Implementation.EnemiesFactory;
 import com.example.demo_2340.Player_Movement.MoveDown;
@@ -31,6 +36,9 @@ public class GameScreen1 extends AppCompatActivity {
     private ImageView playerImageView;
     private ImageView enemyImageView1;
     private ImageView enemyImageView2;
+    private ImageView healthPowerUpImageView;
+    private ImageView speedPowerUpImageView;
+    private ImageView attackCooldownPowerUpImageView;
     private boolean gameOverFlag = false; // Add this flag
     private boolean moveButtonPressed = false;
     // flags to check which enemy attacked
@@ -60,6 +68,11 @@ public class GameScreen1 extends AppCompatActivity {
         enemyImageView1 = findViewById(R.id.enemyImageView1);
         enemyImageView2 = findViewById(R.id.enemyImageView2);
 
+        healthPowerUpImageView = findViewById(R.id.healthPowerUpImageView);
+        speedPowerUpImageView = findViewById(R.id.speedPowerUpImageView);
+        attackCooldownPowerUpImageView = findViewById(R.id.attackCooldownPowerUpImageView);
+
+
         // Get timer
         ScoreTimer.setCurrentGameScreenInstance(this);
 
@@ -70,7 +83,7 @@ public class GameScreen1 extends AppCompatActivity {
 
         // Create Player
         player = Player.getInstance();
-        player.setHealth(100);
+        player.setHealth(200);
         createPlayer();
 
         inheritProperties();
@@ -327,11 +340,28 @@ public class GameScreen1 extends AppCompatActivity {
             // Check and handle collisions for attacking enemies
             CollisionManager.checkAttackingCollisions(player, spriteEnemy, heavyEnemy,
                     playerImageView, enemyImageView1, enemyImageView2);
+            checkPowerUpCollisions();
         } else {
             // Check collisions as usual
             CollisionManager.checkCollisions(player, spriteEnemy, heavyEnemy,
                     playerImageView, enemyImageView1, enemyImageView2);
+            checkPowerUpCollisions();
         }
+    }
+
+    private void checkPowerUpCollisions() {
+        // Check if player collides with power-ups and apply their effects
+        if (CollisionManager.isViewOverlapping(playerImageView, healthPowerUpImageView)) {
+            applyPowerUp(new HealthPowerUp());
+        } else if (CollisionManager.isViewOverlapping(playerImageView, speedPowerUpImageView)) {
+            applyPowerUp(new SpeedPowerUp());
+        } else if (CollisionManager.isViewOverlapping(playerImageView, attackCooldownPowerUpImageView)) {
+            applyPowerUp(new AttackCooldownResetPowerUp(new PowerUpBase()));
+        }
+    }
+
+    private void applyPowerUp(PowerUp powerUp) {
+        powerUp.powerUpHero(player);
     }
 
     private void checkGameOver() {
