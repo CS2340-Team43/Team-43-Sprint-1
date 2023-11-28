@@ -8,7 +8,7 @@ public class Heavy1 implements Enemies, CollisionObserver {
     private double initialYPosition;
     private double xPosition;
     private double yPosition;
-
+    //Initialize heavy1 and add relavent variables
     public Heavy1() {
         type = "Heavy";
         this.initialXPosition = 0;
@@ -16,6 +16,7 @@ public class Heavy1 implements Enemies, CollisionObserver {
         this.xPosition = initialXPosition;
         this.yPosition = initialYPosition;
     }
+    //random and movement variables
     private int movementMultiplier = 4;
     private double randomMultiplier = 10.0 * movementMultiplier;
     private int rightBound = 7 * movementMultiplier;
@@ -25,7 +26,7 @@ public class Heavy1 implements Enemies, CollisionObserver {
     public String getType() {
         return type;
     }
-
+    //implementing the interface methods
     public double move() {
         double randMovementAmount = Math.random() * randomMultiplier;
         String direc = "";
