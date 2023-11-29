@@ -39,6 +39,16 @@ public class Player implements CollisionObserver {
         return instance;
     }
 
+    // Method to create a new instance with the same properties
+    public Player clonePlayer() {
+        Player clonedPlayer = new Player();
+        clonedPlayer.setxPosition(instance.xPosition);
+        clonedPlayer.setyPosition(instance.yPosition);
+        clonedPlayer.setHealth(instance.health);
+        clonedPlayer.setSpeed(instance.speed);
+        return clonedPlayer;
+    }
+
     /**
      * positionGetter
      * @return int position
