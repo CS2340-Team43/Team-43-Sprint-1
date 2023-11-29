@@ -15,7 +15,7 @@ public class Heavy2 implements Enemies, CollisionObserver {
     private double initialycord = 0;
     //constructor to set the relavent variables
     public Heavy2() {
-        type = "Heavy";
+        type = "Heavy2";
         this.initialXPosition = initialxcord;
         this.initialYPosition = initialycord;
         this.xPosition = initialXPosition;
